@@ -28,3 +28,9 @@ void ad9959_rst(){
   digitalWrite(ad9959_pin_rst,LOW);
   return;
 };
+void ad9959_cs(bool state){
+    if(state)
+        digitalWrite(ad9959_pin_cs,HIGH);
+    else
+        digitalWrite(ad9959_pin_cs,LOW);
+};

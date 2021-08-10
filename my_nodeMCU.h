@@ -11,6 +11,7 @@
 void ad9959_rst();
 void ad9959_init();
 void ad9959_io_update();
+void ad9959_cs(bool state);
 //类定义
 class ESPMaster {
   private:

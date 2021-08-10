@@ -81,19 +81,21 @@ void loop() {
     String temp_req = client_extra.readStringUntil('\r');
     const uint8_t * req=(uint8_t *)temp_req.c_str();
     int req_length=temp_req.length();
-
-      esp_spi.writeData((uint8_t *)req,req_length);
     switch ((int)req[0])
     {
     case 0x01:
       Serial.println(F("IO_update"));
       ad9959_io_update();
-
       break;
     case 0x02:
+      ad9959_cs(false);
+      break;
+    case 0x03:
+      ad9959_cs(true);
+      break;
+    case 0x04:
       Serial.println(F("RESET"));
       ad9959_rst();
-
       break;
     default:
       break;
