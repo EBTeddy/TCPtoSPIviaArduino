@@ -5,6 +5,13 @@
 #define ad9959_pin_update 5
 #define ad9959_pin_cs 4
 #define ad9959_pin_rst 16
+
+#define CMD_RESET 0x30
+#define CMD_IO_UPDATE 0x31
+#define CMD_CS_HIGH 0x32
+#define CMD_CS_LOW 0x33
+#define CMD_NULL 0xFF
+#define CMD_length 1
 //声明对象
 //class ESPMaster;
 //声明函数
