@@ -6,7 +6,7 @@
 #define STASSID "DESKTOP-chen"
 #define STAPSK  "12345678"
 #endif
-#define clientTimeout 15
+#define clientTimeout 50
 
 const char* ssid = STASSID;
 const char* password = STAPSK;
@@ -66,23 +66,23 @@ void loop() {
     // const char * cmd_char=cmd_req.c_str();
     switch (temp_req_char[0])
     {
-    case 0x31:
+    case CMD_IO_UPDATE:
       Serial.println(F("IO_update"));
       ad9959_io_update();
       break;
-    case 0x32:
+    case CMD_CS_HIGH:
       ad9959_cs(true);
       Serial.println(F("CS_HIGH"));
       break;
-    case 0x33:
+    case CMD_CS_LOW:
       ad9959_cs(false);
       Serial.println(F("CS_LOW"));
       break;
-    case 0x30:
+    case CMD_RESET:
       Serial.println(F("RESET"));
       ad9959_rst();
       break;
-    case 0xFF:
+    case CMD_NULL:
       Serial.println(F("NULL CMD"));
       break;
     default:
@@ -95,7 +95,7 @@ void loop() {
       // TODO:结尾有个0x00，所以要+1；
       // String spi_req=temp_req.substring(CMD_length,spi_req_length);
       // const char * req = spi_req.c_str();
-      const char * req = temp_req_char+1;
+      const char * req = temp_req_char+CMD_length;
       // 发送SPI指令
       esp_spi.writeData((uint8_t *)req,spi_req_length);
       Serial.println(F("request: "));
