@@ -57,7 +57,7 @@ void loop() {
   // if (!client&&!client_extra) {return;}
   // SPI主指令
   if (client){
-    Serial.println(F("main client！"));
+    Serial.println(F("main client!"));
     client.setTimeout(clientTimeout); 
 
     String temp_req = client.readStringUntil('\r');
@@ -97,10 +97,12 @@ void loop() {
       // const char * req = spi_req.c_str();
       const char * req = temp_req_char+CMD_length;
       // 发送SPI指令
+      client.write(req);
       esp_spi.writeData((uint8_t *)req,spi_req_length);
       Serial.println(F("request: "));
       Serial.write(req);
       Serial.println();
+   
     }      
     // // 读取缓冲区TCP指令
     // while(client.available()){
